@@ -1,0 +1,29 @@
+#Hangman Game 
+#welcoming the user
+name = input("What is your name? ")
+print ("Hello " + name +" ,", "Time to play hangman!")
+import random
+word_list=["apple","beautiful","potato","swagata","water","kite","love","school","movie"] #we xan provide a large number of word list
+lives=6 #we have 6 attempts
+chosen_word=random.choice(word_list) #first system will choose a random word from the list. we have to guess the correct word
+#print(chosen_word)  no need to show the chosen word(by system) to the user!
+display=[] #we will create a display list which will generate as many blanks as letters in the chosen word
+for i in  range(len(chosen_word)):
+    display +='_' 
+print(display) #we will print display so that user can get hint that how many letters consist the word
+game_over=False 
+while not game_over:
+    guessed_letter=input("Guess a letter: ").lower() 
+    for position in range(len(chosen_word)):
+       letter=chosen_word[position]
+       if letter==guessed_letter:
+           display[position]=guessed_letter
+    print(display)       
+    if guessed_letter not in chosen_word:
+        lives -=1
+        if lives==0:
+            game_over=True
+            print("You lose!!!Better luck next time.") 
+    if '_' not in display:
+        game_over=True
+        print("Congratulations.You win.")
